@@ -25,6 +25,9 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import sys
+sys.path.append('/home/seb/git/models/research')
+
 import argparse
 from delf import feature_io
 import matplotlib.image as mpimg
@@ -34,7 +37,6 @@ from scipy.spatial import cKDTree
 from skimage.feature import plot_matches
 from skimage.measure import ransac
 from skimage.transform import AffineTransform
-import sys
 import tensorflow as tf
 from tensorflow.python.platform import app
 
@@ -105,35 +107,35 @@ if __name__ == '__main__':
   parser.add_argument(
       '--image_1_path',
       type=str,
-      default='test_images/image_1.jpg',
+      default='data/oxford5k_images/hertford_000056.jpg',
       help="""
       Path to test image 1.
       """)
   parser.add_argument(
       '--image_2_path',
       type=str,
-      default='test_images/image_2.jpg',
+      default='data/oxford5k_images/oxford_000317.jpg',
       help="""
       Path to test image 2.
       """)
   parser.add_argument(
       '--features_1_path',
       type=str,
-      default='test_features/image_1.delf',
+      default='data/oxford5k_features/hertford_000056.delf',
       help="""
       Path to DELF features from image 1.
       """)
   parser.add_argument(
       '--features_2_path',
       type=str,
-      default='test_features/image_2.delf',
+      default='data/oxford5k_features/oxford_000317.delf',
       help="""
       Path to DELF features from image 2.
       """)
   parser.add_argument(
       '--output_image',
       type=str,
-      default='test_match.png',
+      default='matched_images.png',
       help="""
       Path where an image showing the matches will be saved.
       """)
