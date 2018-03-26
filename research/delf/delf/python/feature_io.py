@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-
 """Python interface for DelfFeatures proto.
 
 Support read and write of DelfFeatures from/to numpy arrays and file.
@@ -21,11 +20,12 @@ Support read and write of DelfFeatures from/to numpy arrays and file.
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
+import numpy as np
 from six.moves import xrange
+import tensorflow as tf
+
 from delf import feature_pb2
 from delf import datum_io
-import numpy as np
-import tensorflow as tf
 
 
 def ArraysToDelfFeatures(locations,
@@ -58,7 +58,7 @@ def ArraysToDelfFeatures(locations,
     assert num_features == len(orientations)
 
   delf_features = feature_pb2.DelfFeatures()
-  for i in xrange(num_features):
+  for i in range(num_features):
     delf_feature = delf_features.feature.add()
     delf_feature.y = locations[i, 0]
     delf_feature.x = locations[i, 1]
@@ -99,7 +99,7 @@ def DelfFeaturesToArrays(delf_features):
   attention = np.zeros([num_features])
   orientations = np.zeros([num_features])
 
-  for i in xrange(num_features):
+  for i in range(num_features):
     delf_feature = delf_features.feature[i]
     locations[i, 0] = delf_feature.y
     locations[i, 1] = delf_feature.x
