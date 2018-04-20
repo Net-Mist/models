@@ -16,6 +16,7 @@
 """SSDFeatureExtractor for MobilenetV2 features."""
 
 import tensorflow as tf
+import os
 
 from object_detection.meta_architectures import ssd_meta_arch
 from object_detection.models import feature_map_generators
@@ -106,7 +107,7 @@ class SSDMobileNetV2FeatureExtractor(ssd_meta_arch.SSDFeatureExtractor):
 
     with tf.variable_scope('MobilenetV2', reuse=self._reuse_weights) as scope:
       with slim.arg_scope(
-          mobilenet_v2.training_scope(is_training=None, bn_decay=0.9997)), \
+          mobilenet_v2.training_scope(is_training=os.environ['SSD_MOBILENET_V2_TRAINING'], bn_decay=0.9997)), \
           slim.arg_scope(
               [mobilenet.depth_multiplier], min_depth=self._min_depth):
         with (slim.arg_scope(self._conv_hyperparams_fn())
